@@ -1,15 +1,11 @@
-FROM php:8.3.0-fpm-alpine
+FROM    php:8.3.0-fpm-alpine
 
 # Install packages
 RUN apk add --no-cache curl git build-base zlib-dev oniguruma-dev autoconf bash
 RUN apk add --no-cache autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c \
     && apk add --no-cache linux-headers
-
-ARG INSTALL_XDEBUG=false
-RUN if [${INSTALL_XDEBUG} = true]; \
-    then \
-      pecl install xdebug && docker-php-ext-enable xdebug; \
-    fi;
+RUN pecl install xdebug  \
+    && docker-php-ext-enable xdebug
 
 COPY ./docker/php-fpm/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
