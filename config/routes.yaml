@@ -1,9 +1,7 @@
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+    resource: ../src/Shared/Infrastructure/Controller/
     type: attribute
-health_check:
-    path: /health-check
-    methods: GET
-    controller: App\Controller\HealthCheckAction::index
+kernel:
+    resource: ../src/Shared/Infrastructure/Kernel.php
+    type: attribute
+
